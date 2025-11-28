@@ -1,7 +1,7 @@
 # Bayut MCP Server
 
 ![Python](https://img.shields.io/badge/python-3.10+-blue.svg)
-![License](https://img.shields.io/badge/license-MIT-green.svg)
+![License](https://img.shields.io/badge/license-Apache%202.0-green.svg)
 ![MCP](https://img.shields.io/badge/MCP-1.1.0-orange.svg)
 
 MCP (Model Context Protocol) server for UAE real estate search via the Bayut API. Enables direct property search and market analysis through Claude Desktop and other AI assistants.
@@ -197,7 +197,7 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## License
 
-MIT License - see LICENSE file for details
+Apache License 2.0 - see LICENSE file for details
 
 ## Support
 
