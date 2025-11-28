@@ -1,0 +1,17 @@
+[project]
+name = "bayut-mcp"
+version = "0.1.0"
+description = "MCP server for Bayut UAE real estate API"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "mcp>=1.1.0",
+    "httpx>=0.27.0"
+]
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+py-modules = ["server"]
