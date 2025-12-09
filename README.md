@@ -1,33 +1,36 @@
 # Bayut MCP Server
 
 ![Python](https://img.shields.io/badge/python-3.10+-blue.svg)
-![License](https://img.shields.io/badge/license-Apache%202.0-green.svg)
+![License](https://img.shields.io/badge/license-MIT-green.svg)
 ![MCP](https://img.shields.io/badge/MCP-1.1.0-orange.svg)
 
 MCP (Model Context Protocol) server for UAE real estate search via the Bayut API. Enables direct property search and market analysis through Claude Desktop and other AI assistants.
 
 ## Features
 
-### 🔍 Core Functionality
+### 🏠 Core Functionality
 - **Location Search** - Autocomplete for UAE locations (cities, neighborhoods, buildings)
 - **Property Search** - Extensive filtering options for sale/rent properties
 - **Property Details** - Complete information including photos, floorplans, agent details
 - **Transaction History** - Historical price data for Dubai properties
 - **Market Analysis** - Quick market summaries and trends for specific areas
+- **AI Valuations** - TruEstimate™ market value estimates with comparable sales and rental yields
 
 ### 💡 Use Cases
 - **Investment Research** - Find and analyze properties across Dubai and UAE
 - **Market Intelligence** - Track price trends and transaction history
+- **Property Valuation** - Get AI-powered market value estimates with confidence levels
+- **Rental Yield Analysis** - Compare returns across different areas with comparable data
 - **Golden Visa Planning** - Search for property portfolios meeting visa requirements
-- **Rental Yield Analysis** - Compare returns across different areas
 - **Property Comparison** - Evaluate multiple listings with detailed filters
+- **Due Diligence** - Verify property prices against market comparables before purchase
 
 ## Installation
 
 ### Prerequisites
 - Python 3.10 or higher
 - [Claude Desktop](https://claude.ai/download)
-- [RapidAPI Account](https://rapidapi.com/BayutAPI/api/bayut-api1) with Bayut API subscription
+- [RapidAPI Account](https://rapidapi.com/taviansol/api/uae-real-estate2) with UAE Real Estate API subscription
 
 ### Step 1: Install Dependencies
 
@@ -37,8 +40,8 @@ pip install mcp httpx
 
 ### Step 2: Get API Key
 
-1. Sign up at [RapidAPI](https://rapidapi.com/BayutAPI/api/bayut-api1)
-2. Subscribe to Bayut API (Free plan: 100 requests/month)
+1. Sign up at [RapidAPI](https://rapidapi.com/taviansol/api/uae-real-estate2)
+2. Subscribe to UAE Real Estate API (Free plan: 750 requests/month)
 3. Copy your API key from the dashboard
 
 ### Step 3: Configure Claude Desktop
@@ -89,12 +92,14 @@ Once configured, you can interact with Bayut directly through Claude:
 ```
 "What are the average prices for studios in Dubai Marina?"
 "Show me transaction history for Dubai South in the last year"
+"Get market valuation for Elite Residences 3, Unit 710"
 ```
 
 **Investment Planning:**
 ```
 "Find 5 properties totaling under 2M AED with at least 7% rental yield"
 "Compare rental yields between JVC and International City"
+"Estimate the market value and rental yield for this property"
 ```
 
 ## Available Tools
@@ -106,14 +111,8 @@ Once configured, you can interact with Bayut directly through Claude:
 | `get_property_details` | Complete details for a specific property |
 | `get_transactions` | Transaction records for price analysis |
 | `get_market_summary` | Quick market overview for a location |
+| `get_tru_estimate` | AI-powered property valuation with comparables and trends |
 
-## API Limits
-
-- **Free Plan**: 100 requests/month (~3 per day)
-- **Basic Plan**: 1,000 requests/month - $19.99
-- **Pro Plan**: 10,000 requests/month - $49.99
-
-For testing and initial research, the free plan is sufficient.
 
 ## Advanced Usage
 
@@ -145,6 +144,37 @@ get_transactions(
 )
 ```
 
+### Property Valuation
+
+Get AI-powered market estimates with comparable sales and rental data:
+
+```python
+get_tru_estimate(
+    location_id="15974",  # Building location ID
+    unit_number="710"     # Unit number
+)
+```
+
+Returns:
+- **Estimated Market Value** with confidence level
+- **Comparable Sales** (recent similar properties sold)
+- **Comparable Rentals** (similar properties rented)
+- **2-Year Price Trends** (historical price movements)
+- **Yield Projections** (gross & net rental yields)
+- **Service Charges** and maintenance costs
+
+Alternative identifiers:
+```python
+# Using Title Deed
+get_tru_estimate(title_deed="25671", year="2022")
+
+# Using Oqood
+get_tru_estimate(oqood="161920", year="2023")
+
+# Using DEWA number
+get_tru_estimate(dewa="392315580")
+```
+
 ## Troubleshooting
 
 ### "No tools available"
@@ -163,8 +193,8 @@ pip install mcp httpx
 ```
 
 ### "404 Not Found"
-- Ensure you're subscribed to the correct Bayut API on RapidAPI
-- Base URL should be: `https://bayut-api1.p.rapidapi.com`
+- Ensure you're subscribed to the UAE Real Estate API on RapidAPI
+- Base URL should be: `https://uae-real-estate2.p.rapidapi.com`
 
 ## Development
 
@@ -190,27 +220,30 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## Resources
 
-- [Bayut API Documentation](https://docs.bayutapi.com/)
-- [RapidAPI Hub](https://rapidapi.com/BayutAPI/api/bayut-api1)
+- [UAE Real Estate API Documentation](https://rapidapi.com/taviansol/api/uae-real-estate2)
+- [RapidAPI Hub](https://rapidapi.com/taviansol/api/uae-real-estate2)
 - [MCP Documentation](https://modelcontextprotocol.io)
 - [Claude Desktop](https://claude.ai/download)
+- [Bayut.com](https://www.bayut.com) - Data source
 
 ## License
 
-Apache License 2.0 - see LICENSE file for details
+MIT License - see LICENSE file for details
 
 ## Support
 
 For issues or questions:
 - Open an issue on GitHub
-- Email: bayut.restapi@gmail.com (for Bayut API issues)
+- Check [RapidAPI Support](https://rapidapi.com/taviansol/api/uae-real-estate2) for API issues
 
 ## Acknowledgments
 
 - Built with [FastMCP](https://github.com/jlowin/fastmcp)
-- Powered by [Bayut API](https://bayutapi.com/)
+- Powered by [UAE Real Estate API](https://rapidapi.com/taviansol/api/uae-real-estate2)
 - UAE real estate data from [Bayut.com](https://www.bayut.com)
+- TruEstimate™ valuations powered by AI market analysis
 
 ---
 
+**Built for Claude Desktop** | **UAE Real Estate Data by Bayut**
 **Built for Claude Desktop** | **UAE Real Estate Data by Bayut**
