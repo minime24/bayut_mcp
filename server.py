@@ -14,11 +14,11 @@ mcp = FastMCP("Bayut Real Estate")
 
 # API Configuration
 RAPIDAPI_KEY = os.getenv("RAPIDAPI_KEY", "")
-BASE_URL = "https://bayut-api1.p.rapidapi.com"
+BASE_URL = "https://uae-real-estate2.p.rapidapi.com"
 
 HEADERS = {
     "x-rapidapi-key": RAPIDAPI_KEY,
-    "x-rapidapi-host": "bayut-api1.p.rapidapi.com"
+    "x-rapidapi-host": "uae-real-estate2.p.rapidapi.com"
 }
 
 
@@ -360,6 +360,66 @@ def get_market_summary(location_query: str, purpose: str = "for-sale") -> dict:
             "transactions": transactions[:5]  # Top 5
         }
     }
+
+
+@mcp.tool()
+def get_tru_estimate(
+    location_id: Optional[str] = None,
+    unit_number: Optional[str] = None,
+    title_deed: Optional[str] = None,
+    year: Optional[str] = None,
+    property_type: str = "unit",
+    oqood: Optional[str] = None,
+    dewa: Optional[str] = None
+) -> dict:
+    """
+    Get AI-powered property valuation report with market estimates, comparables, 
+    and price trends. Essential for evaluating auction properties!
+    
+    Exactly ONE identifier must be provided:
+    - location_id + unit_number
+    - title_deed + year
+    - oqood + year  
+    - dewa
+    
+    Args:
+        location_id: Building location ID (from search_locations)
+        unit_number: Unit number within building (e.g., "101")
+        title_deed: Title deed number
+        year: Year of title deed or oqood
+        property_type: "unit", "villa", or "land" (default: "unit")
+        oqood: Oqood number
+        dewa: DEWA number
+    
+    Returns:
+        Comprehensive valuation report with:
+        - Current estimated market value
+        - Comparable sales and rentals
+        - Price trends (2 year history)
+        - Yield projections
+        - Confidence levels
+    """
+    params = {}
+    
+    if location_id and unit_number:
+        params["location_id"] = location_id
+        params["unit_number"] = unit_number
+    elif title_deed and year:
+        params["title_deed"] = title_deed
+        params["year"] = year
+        params["property_type"] = property_type
+    elif oqood and year:
+        params["oqood"] = oqood
+        params["year"] = year
+        params["property_type"] = property_type
+    elif dewa:
+        params["dewa"] = dewa
+    else:
+        return {"error": "Must provide exactly one identifier: (location_id + unit_number) OR (title_deed + year) OR (oqood + year) OR (dewa)"}
+    
+    result = make_request("GET", "/tru_estimate", params=params)
+    
+    return result
 
 
 if __name__ == "__main__":
